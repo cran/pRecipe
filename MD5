@@ -1,14 +1,18 @@
-bac76df93e9ff753f4e91cba4ece169f *DESCRIPTION
+7709ba3649058351e619c830b1cd6e4d *DESCRIPTION
 dacaed41ed032a40b570900750663bd5 *NAMESPACE
-8c568cf7eb1155234625ceca9a1dc120 *NEWS.md
+1d46b9e12b83f30dbce957d7d8231fc9 *NEWS.md
 34e226b829d371c17545337dd15df93a *R/aux_functions.R
 3026f41ea15a3bdb782d25adccd646de *R/downloaders.R
 cb504d3f31647438fb181a37a4d6a3e9 *R/globals.R
-8e3bbed1e9520668603867138fae3d23 *R/graphics.R
+81907ba11c171b2c62a8fb6dfc84772c *R/graphics.R
 ae0b05758a0adcd0d14962be3e42eb17 *R/integrator.R
-ce3a8e5be3f13933f2e2a4c596ec0035 *R/pRecipe.R
+d95399ec5c264ab0ca6d723559a271ea *R/pRecipe.R
 ffe0febfaea72252283d2aa53a339e55 *R/reformatters.R
+bd6ee900e783d803704c4391ab50ee31 *build/vignette.rds
 43dccbf40e0892e32a8aca06030d6e7c *inst/WORDLIST
+5e68087fdeda23d4dd835e058d705e85 *inst/doc/my-vignette.R
+9a1e66f2eb7ba266d7098b946109bb14 *inst/doc/my-vignette.Rmd
+271f6741ad67291e3fb29e1e7789963e *inst/doc/my-vignette.html
 c9d87af189fb0655fc5e00882b0977d5 *man/create_folders.Rd
 35c165bc04ea66e3efbf87d80bc51f13 *man/crop_data.Rd
 7a33e216fd34149ab5fbfcd6357d764c *man/display_data.Rd
@@ -29,6 +33,7 @@ f96101eef534e6a1bfff3b25e182c59f *man/download_trmm_3b43.Rd
 c6b9863b568aeeecfb8c7339ccc0d171 *man/download_udel.Rd
 024b55ef8aef3e5fbb267048718fea62 *man/dt_aggregate.Rd
 6859f22b6f851c79058217216a9946f2 *man/dt_parallel.Rd
+33bcc78c00ca43fc6e5999529fc22880 *man/figures/logo.png
 8f9ed91e49bdc5cfe1a327e85441c602 *man/import_full_data.Rd
 9b6f2ce4a3cd9d82ad745941f8a348a7 *man/import_subset_data.Rd
 8058cbcc0d51203eb9ce710b68f02ae8 *man/merge_1836_1890.Rd
@@ -59,3 +64,4 @@ a49b02f564143a20a5f8d1db41b0284a *man/sd_20cr.Rd
 0622a97a2aaa3c342f09636052c2d7f5 *tests/spelling.R
 cb71fdced72b3f5d83d5d6304acead82 *tests/testthat.R
 6203291892e70fb79ec183f2f58bca1d *tests/testthat/test-pRecipe.R
+9a1e66f2eb7ba266d7098b946109bb14 *vignettes/my-vignette.Rmd
