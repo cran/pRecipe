@@ -1,5 +1,5 @@
 ---
-title: "pRecipe| Precipitation R Recipe"
+title: "pRecipe| Precipitation R Recipes"
 author: "Mijael Rodrigo Vargas Godoy, Yannis Markonis"
 date: "`r Sys.Date()`"
 output: 
@@ -7,7 +7,7 @@ output:
     toc: true
     toc_depth: 4
 vignette: >
-  %\VignetteIndexEntry{pRecipe| Precipitation R Recipe}
+  %\VignetteIndexEntry{pRecipe| Precipitation R Recipes}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
@@ -26,7 +26,10 @@ text-align: justify}
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   echo = TRUE,
-  eval = FALSE
+  eval = TRUE,
+  fig.width = 7,
+  warning = FALSE,
+  message = FALSE
 )
 ```
 
@@ -117,23 +120,23 @@ In this introductory recipe we will first download the ERA5 data set. We will th
 
 ## Installation
 
-```{r}
+```{r, eval=FALSE}
 install.packages('pRecipe')
 library(pRecipe)
 ```
 
 ## Download
 
-Downloading the entire data collection or only a few data sets is quite straightforward. You just call the `download_data` function, which has two arguments *name* and *project_folder*.
+Downloading the entire data collection or only a few data sets is quite straightforward. You just call the `download_data` function, which has two arguments *name* and *destination*.
 
 * *name* is set to "all" by default, but you can specify the names of your data sets of interest only.
-* *project_folder* is set to "." by default. I.e., the current working directory. By replacing it for [your_project_folder], the downloaded files will be stored in [your_project_folder]/data/database.
+* *destination* is set to "." by default. I.e., the current working directory. By replacing it for [your_project_folder], the downloaded files will be stored in [your_project_folder] instead.
 
 Let's download the ERA5 data set and inspect its content with `show_info`:
 
-```{r}
-download_data(name = "era5", project_folder = ".")
-show_info("./data/database/era5_tp_mm_global_195901_202112_025_monthly.nc")
+```{r, eval=FALSE}
+download_data(name = "era5", destination = ".")
+show_info("era5_tp_mm_global_195901_202112_025_monthly.nc")
 ```
 
 ```
@@ -161,21 +164,18 @@ Once we have downloaded our database, we can start processing the data with:
 
 ### Subset
 
-To subset our data to a desired region and period of interest, we use the `subset_spacetime` function, which has five arguments *name*, *start_year*, *end_year*, *bbox*, and *database_path*.
+To subset our data to a desired region and period of interest, we use the `subset_spacetime` function, which has three arguments *data_file*, *years*, and *bbox*.
 
-* *name* is the name of a data set in the database or a raster object. In the first case, the generated ".nc" file will follow the same conventions as previously described and will be stored in [your_project_folder]/data/processed. In the second case, the output file name will be [original_name]_subset.nc and will be stored in the same location of the input file.
-* *start_year* is the start of the period of interest.
-* *end_year* is the end of the period of interest.
+* *data_file* is the path to the data set of interest. The output file will be stored in the same location of the input file.
+* *years* is the period of interest in the form (start_year, end_year)
 * *bbox* is the bounding box of the region of interest with the coordinates in degrees in the form (xmin, xmax, ymin, ymax).
-* *database_path* is set to "./data/database" by default. It should direct to [your_project_folder]/data/database. If name is a raster object, this argument is ignored.
 
 Let's subset the ERA5 data set over Central Europe (2,28,42,58) for the 1981-2020 period, and inspect its content with `show_info`:
 
-```{r}
-subset_spacetime("era5", start_year = 1981, end_year = 2020, 
-                 bbox = c(2,28,42,58), 
-                 database_path = "./data/database/")
-show_info("./data/processed/era5_tp_mm_subset_1981_2020_025_monthly.nc")
+```{r, eval=FALSE}
+subset_spacetime("era5_tp_mm_global_195901_202112_025_monthly.nc", 
+                 years = c(1981, 2020), bbox = c(2,28,42,58))
+show_info("era5_tp_mm_subset_198101_202012_025_monthly.nc")
 ```
 
 ```
@@ -184,7 +184,7 @@ show_info("./data/processed/era5_tp_mm_subset_1981_2020_025_monthly.nc")
 [3] "resolution : 0.25, 0.25  (x, y)"
 [4] "extent     : 2, 28, 42, 58  (xmin, xmax, ymin, ymax)"
 [5] "crs        : +proj=longlat +datum=WGS84 +no_defs "
-[6] "source     : era5_tp_mm_subset_1981_2020_025_monthly.nc "
+[6] "source     : era5_tp_mm_subset_198101_202012_025_monthly.nc "
 [7] "names      : X1981.01.01, X1981.02.01, X1981.03.01, X1981.04.01, X1981.05.01, X1981.06.01, X1981.07.01, X1981.08.01, X1981.09.01, X1981.10.01, X1981.11.01, X1981.12.01, X1982.01.01, X1982.02.01, X1982.03.01, ... "
 [8] "Date/time  : 1981-01-01, 2020-12-01 (min, max)"
 [9] "varname    : tp "
@@ -192,19 +192,18 @@ show_info("./data/processed/era5_tp_mm_subset_1981_2020_025_monthly.nc")
 
 ### Crop
 
-To further crop our data to a desired polygon other than a rectangle, we use the `crop_data` function, which has three arguments *nc_path*, *shp_path*, and *save_nc*.
+To further crop our data to a desired polygon other than a rectangle, we use the `crop_data` function, which has two arguments *data_file*, and *shp_path*.
 
-* *nc_path* is the path to a ".nc" data set file or a Raster object.
+* *data_file* is the path to a ".nc" data set file.
 * *shp_path* is the path to a ".shp" file that we want to use to crop our data.
-* *save_nc* is either TRUE or FALSE (default). If TRUE will write a ".nc" file with the cropped data and there will be no return value. Otherwise, it returns the cropped data as a Raster object.
 
-Let's crop our ERA5 subset to cover only the Czech Republic with the respective [shape file](https://biogeo.ucdavis.edu/data/diva/adm/CZE_adm.zip), and inspect its content with `show_info`:
 
-```{r}
-crop_data(nc_path = "./data/processed/era5_tp_mm_subset_1981_2020_025_monthly.nc",
-          shp_path = "./shapefiles/CZE_adm0.shp",
-          save_nc = TRUE)
-show_info("./data/processed/era5_tp_mm_subset_1981_2020_025_monthly_cropped.nc")
+Let's crop our ERA5 subset to cover only the Czech Republic with the respective [shape file](https://geodata.ucdavis.edu/gadm/gadm4.1/shp/gadm41_CZE_shp.zip), and inspect its content with `show_info`:
+
+```{r, eval=FALSE}
+crop_data(data_file = "era5_tp_mm_subset_198101_202012_025_monthly.nc", 
+          shp_path = "CZE_adm0.shp")
+show_info("era5_tp_mm_cropped_198101_202012_025_monthly.nc")
 ```
 
 ```
@@ -221,86 +220,79 @@ show_info("./data/processed/era5_tp_mm_subset_1981_2020_025_monthly_cropped.nc")
 
 ### Generate Time series
 
-To make a time series out of our data, we use the `make_ts` function, which has three arguments *name*, *csv_out*, and *database_path*.
+To make a time series out of our data, we use the `make_ts` function, which has one argument *data_file*.
 
-* *name* is the name of a data set in the database or a Raster object. In the first case, the generated ".csv" will be stored in [your_project_folder]/data/processed. In the second case, the output file name will be [original_name]_ts.csv and will be stored in the same location of the input file.
-* *csv_out* (optional) is the name of the output ".csv" file. If not provided, the output file will be named [original_name]_ts.csv.
-* *database_path* is set to "./data/database" by default. It should direct to [your_project_folder]/data/database. If name is a raster object, this argument is ignored.
+* *data_file* is the path to a ".nc" data set file.
 
 Let's generate the time series for our three different ERA5 data sets (Global, Central Europe, and Czech Republic), and inspect its first 12 rows:
 
-```{r}
-make_ts("era5", database_path = "./data/database/")
-tp_ts <- readr::read_csv("./data/processed/era5_ts.csv")
-head(tp_ts, 12)
+```{r, eval=FALSE}
+make_ts("era5_tp_mm_global_195901_202112_025_monthly.nc")
+era5_global_ts <- fread("era5_tp_mm_global_195901_202112_025_monthly_ts.csv")
+head(era5_global_ts, 12)
 ```
 
 ```
-# A tibble: 12 × 2
-   date       value
-   <date>     <dbl>
- 1 1959-01-01  90.6
- 2 1959-02-01  78.9
- 3 1959-03-01  87.5
- 4 1959-04-01  86.9
- 5 1959-05-01  87.3
- 6 1959-06-01  89.1
- 7 1959-07-01  91.8
- 8 1959-08-01  91.0
- 9 1959-09-01  85.3
-10 1959-10-01  88.5
-11 1959-11-01  85.5
-12 1959-12-01  90.0
+          date    value
+        <IDat>    <num>
+ 1: 1959-01-01 90.64116
+ 2: 1959-02-01 78.91318
+ 3: 1959-03-01 87.50946
+ 4: 1959-04-01 86.93461
+ 5: 1959-05-01 87.25465
+ 6: 1959-06-01 89.14776
+ 7: 1959-07-01 91.84578
+ 8: 1959-08-01 90.96841
+ 9: 1959-09-01 85.30629
+10: 1959-10-01 88.53759
+11: 1959-11-01 85.49954
+12: 1959-12-01 90.00676
 ```
 
-```{r}
-era5_subset <- raster::brick("./data/processed/era5_tp.mm_subset_1981_2020_025_monthly.nc")
-make_ts(era5_subset)
-subset_ts <- readr::read_csv("./data/processed/era5_tp.mm_subset_1981_2020_025_monthly_ts.csv")
-head(subset_ts, 12)
+```{r, eval=FALSE}
+make_ts("era5_tp_mm_subset_198101_202012_025_monthly.nc")
+era5_ce_ts <- fread("era5_tp_mm_subset_198101_202012_025_monthly_ts.csv")
+head(era5_ce_ts, 12)
 ```
 
 ```
-# A tibble: 12 × 2
-   date       value
-   <date>     <dbl>
- 1 1981-01-01  73.8
- 2 1981-02-01  46.4
- 3 1981-03-01  89.5
- 4 1981-04-01  47.8
- 5 1981-05-01  88.4
- 6 1981-06-01  98.7
- 7 1981-07-01 101. 
- 8 1981-08-01  69.7
- 9 1981-09-01  89.2
-10 1981-10-01 112. 
-11 1981-11-01  74.9
-12 1981-12-01 113. 
+          date     value
+        <IDat>     <num>
+ 1: 1981-01-01  73.83279
+ 2: 1981-02-01  46.39281
+ 3: 1981-03-01  89.47381
+ 4: 1981-04-01  47.78148
+ 5: 1981-05-01  88.37288
+ 6: 1981-06-01  98.71906
+ 7: 1981-07-01 100.87810
+ 8: 1981-08-01  69.74586
+ 9: 1981-09-01  89.17575
+10: 1981-10-01 111.56850
+11: 1981-11-01  74.93134
+12: 1981-12-01 112.66740 
 ```
 
-```{r}
-era5_cropped <- raster::brick("./data/processed/era5_tp.mm_subset_1981_2020_025_monthly_cropped.nc")
-make_ts(era5_cropped)
-cropped_ts <- readr::read_csv("./data/processed/era5_tp.mm_subset_1981_2020_025_monthly_cropped_ts.csv")
-head(cropped_ts, 12)
+```{r, eval=FALSE}
+make_ts("era5_tp_mm_cropped_198101_202012_025_monthly.nc")
+era5_cze_ts <- fread("era5_tp_mm_cropped_198101_202012_025_monthly_ts.csv")
+head(era5_cze_ts, 12)
 ```
 
 ```
-# A tibble: 12 × 2
-   date       value
-   <date>     <dbl>
- 1 1981-01-01  65.0
- 2 1981-02-01  38.9
- 3 1981-03-01  68.4
- 4 1981-04-01  49.7
- 5 1981-05-01  77.3
- 6 1981-06-01  67.3
- 7 1981-07-01 189. 
- 8 1981-08-01  80.4
- 9 1981-09-01  90.1
-10 1981-10-01 115. 
-11 1981-11-01  75.2
-12 1981-12-01  89.5
+          date     value
+        <IDat>     <num>
+ 1: 1981-01-01  65.02662
+ 2: 1981-02-01  38.92457
+ 3: 1981-03-01  68.44784
+ 4: 1981-04-01  49.73646
+ 5: 1981-05-01  77.29006
+ 6: 1981-06-01  67.25784
+ 7: 1981-07-01 188.89990
+ 8: 1981-08-01  80.37363
+ 9: 1981-09-01  90.08721
+10: 1981-10-01 115.19530
+11: 1981-11-01  75.15187
+12: 1981-12-01  89.48265
 ```
 
 ## Visualize
@@ -320,85 +312,84 @@ Let's plot our three different ERA5 data sets (Global, Central Europe, and Czech
 
 To see a map of any data set raw or processed, we use `plot_map` which takes only one layer of the RasterBrick as input.
 
-```{r}
-global <- raster::raster("./data/database/era5_tp_mm_global_195901_202112_025_monthly.nc")
+```{r, eval=FALSE}
+global <- brick("era5_tp_mm_global_195901_202112_025_monthly.nc")
 plot_map(global[[1]])
 ```
 
-![](plots/map.png){width=75%}
+![](plots/map.png){width=90%}
 
-```{r}
-central_europe <- raster::brick("./data/processed/era5_tp_mm_subset_1981_2020_025_monthly.nc")
+```{r, eval=FALSE}
+central_europe <- brick("era5_tp_mm_subset_198101_202012_025_monthly.nc")
 plot_map(central_europe[[1]])
 ```
 
-![](plots/map_ceu.png){width=75%}
+![](plots/map_ceu.png){width=90%}
 
-```{r}
-czechia <- raster::brick("./data/processed/era5_tp_mm_subset_1981_2020_025_monthly_cropped.nc")
+```{r, eval=FALSE}
+czechia <- brick("era5_tp_mm_cropped_198101_202012_025_monthly.nc")
 plot_map(czechia[[1]])
 ```
 
-![](plots/map_cze.png){width=75%}
+![](plots/map_cze.png){width=90%}
 
 ### Time Series Visuals
 
-To draw a time series generated by `make_ts`, we use any of the options below, which take only a `make_ts` ".csv" generated file.
+To draw a time series generated by `make_ts`, we use any of the options below, which takes only a `make_ts` ".csv" generated file.
 
 #### Line
 
-```{r}
-plot_line(tp_ts)
-#plot_line(subset_ts)
-#plot_line(cropped_ts)
+```{r, include=FALSE}
+library(pRecipe)
+data("era5_global_ts")
+data("era5_ce_ts")
+data("era5_cze_ts")
 ```
 
-![](plots/line.png){width=75%}
+```{r}
+plot_line(era5_global_ts)
+plot_line(era5_ce_ts)
+plot_line(era5_cze_ts)
+```
 
 #### Heatmap
 
 ```{r}
-plot_heatmap(tp_ts)
-#plot_heatmap(subset_ts)
-#plot_heatmap(cropped_ts)
+plot_heatmap(era5_global_ts)
+plot_heatmap(era5_ce_ts)
+plot_heatmap(era5_cze_ts)
 ```
-
-![](plots/heatmap.png){width=75%}
 
 #### Boxplot
 
 ```{r}
-plot_box(tp_ts)
-#plot_box(subset_ts)
-#plot_box(cropped_ts)
+plot_box(era5_global_ts)
+plot_box(era5_ce_ts)
+plot_box(era5_cze_ts)
 ```
-  
-![](plots/box.png){width=75%}
 
 #### Density
 
 ```{r}
-plot_density(tp_ts)
-#plot_density(subset_ts)
-#plot_density(cropped_ts)
+plot_density(era5_global_ts)
+plot_density(era5_ce_ts)
+plot_density(era5_cze_ts)
 ```
-
-![](plots/density.png){width=75%}
 
 #### Summary
 
-```{r}
-plot_summary(tp_ts)
-#plot_summary(subset_ts)
-#plot_summary(cropped_ts)
+**NOTE:** For good aesthetics we recommend saving `plot_summary` with `ggsave(<filename>, <plot>, width = 16.3, height = 15.03)`.
+
+```{r, eval=FALSE}
+plot_summary(era5_global_ts)
+#plot_summary(era5_ce_ts)
+#plot_summary(era5_cze_ts)
 ```
 
-![](plots/summary.png){width=90%}
+![](plots/summary.png){width=95%}
 
 # Coming Soon
 
-More functions for data processing and expanding the data collection.
+More functions for data processing and expanding the database.
 
 # References
-
-
