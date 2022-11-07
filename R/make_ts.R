@@ -18,6 +18,7 @@ make_ts <- function(data_file){
   checker <- name_check(data_file)
   if (checker$length == 8) {
     nc_out <- paste(checker$name, collapse = "_")
+    nc_out <- sub(".nc.*", "", nc_out)
     nc_out <- paste0(nc_out, "_ts.csv")
     nc_mid <- sub("(.*/)(.*)", "\\1", nc_in)
     nc_out <- paste0(nc_mid, nc_out)
@@ -26,6 +27,7 @@ make_ts <- function(data_file){
     nc_out <- sub(".nc.*", "", nc_in)
     nc_out <- paste0(nc_out, "_ts.csv")
   }
+  nc_out <- sub(".nc.nc.*", ".nc", nc_out)
   check_out <- exists_check(nc_out)
   if (check_out$exists) stop(check_out$sms)
   if (Sys.info()['sysname'] == "Windows") {

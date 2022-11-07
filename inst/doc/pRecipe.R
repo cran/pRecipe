@@ -10,9 +10,12 @@ knitr::opts_chunk$set(
 ## ---- eval=FALSE--------------------------------------------------------------
 #  install.packages('pRecipe')
 #  library(pRecipe)
+#  #Load additional packages
+#  library(data.table)
+#  library(raster)
 
 ## ---- eval=FALSE--------------------------------------------------------------
-#  download_data(name = "era5", destination = ".")
+#  download_data(data_name = "era5", destination = ".")
 #  show_info("era5_tp_mm_global_195901_202112_025_monthly.nc")
 
 ## ---- eval=FALSE--------------------------------------------------------------
