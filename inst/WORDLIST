@@ -2,6 +2,7 @@ CDR
 CLSM
 CMAP
 CMORPH
+autosave
 CPC
 CRU
 Earthdata
@@ -13,6 +14,12 @@ GPCC
 GPCP
 GPM
 GZ
+FLDAS
+JRA
+MERRA
+fldas
+jra
+merra
 RasterBrick
 hydrological
 lon

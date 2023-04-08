@@ -4,7 +4,12 @@
 \alias{download_data}
 \title{Download various precipitation data products}
 \usage{
-download_data(data_name = "all", destination = ".")
+download_data(
+  data_name = "all",
+  path = ".",
+  domain = "raw",
+  time_res = "monthly"
+)
 }
 \arguments{
 \item{data_name}{a character string with the name(s) of the desired data set. Suitable options are:
@@ -19,6 +24,7 @@ download_data(data_name = "all", destination = ".")
 \item{"em-earth" for EM-EARTH,}
 \item{"era20c" for ERA-20C,}
 \item{"era5" for ERA5,}
+\item{"fldas" for FLDAS,}
 \item{"ghcn" for GHCN-M v2,}
 \item{"gldas-clsm" for GLDAS CLSM,}
 \item{"gldas-noah" for GLDAS NOAH,}
@@ -26,6 +32,8 @@ download_data(data_name = "all", destination = ".")
 \item{"gpcc" for GPCC v2020,}
 \item{"gpcp" for GPCP v2.3,}
 \item{"gpm_imerg" for GPM IMERGM Final v06,}
+\item{"jra55" for JRA-55,}
+\item{"merra2" for MERRA-2,}
 \item{"mswep" for MSWEP v2.8,}
 \item{"ncep-doe" for NCEP/DOE,}
 \item{"ncep-ncar" for NCEP/NCAR,}
@@ -36,7 +44,21 @@ download_data(data_name = "all", destination = ".")
 \item{"udel" for UDEL v501.}
 }}
 
-\item{destination}{a character string with the path where the database will be downloaded.}
+\item{path}{a character string with the path where the database will be downloaded.}
+
+\item{domain}{a character string with the desired domain data set. Suitable options are:
+\itemize{
+\item{"raw" for default available spatial coverage,}
+\item{"global" for data sets with global (land and ocean) coverage,}
+\item{"land" for data sets with land only coverage,}
+\item{"ocean", for data sets with ocean only coverage.}
+}}
+
+\item{time_res}{a character string with the desired time resolution. Suitable options are:
+\itemize{
+\item{"monthly",}
+\item{"yearly".}
+}}
 }
 \value{
 No return value, called to download the required data sets.
@@ -46,6 +68,6 @@ The function \code{download_data} downloads the selected data product.
 }
 \examples{
 \donttest{
-download_data("gldas-vic", tempdir())
+download_data("gldas-vic", tempdir(), time_res = "yearly")
 }
 }
