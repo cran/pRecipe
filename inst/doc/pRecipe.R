@@ -89,19 +89,19 @@ tibble::tribble(
 #  show_info(gpm_subset)
 
 ## ----crop, eval = FALSE-------------------------------------------------------
-#  gpm_cz <- crop_data(x = gpm_subset, shp_path = "CZE_adm0.shp")
+#  gpm_cz <- crop_data(x = gpm_subset, shp_path = "gadm41_CZE_0.shp")
 #  show_info(gpm_cz)
 
 ## ----global_ts, eval=FALSE----------------------------------------------------
-#  gpm_global_ts <- make_ts(gpm_global)
+#  gpm_global_ts <- make_ts(gpm_global, 'gpm-imerg')
 #  head(gpm_global_ts, 12)
 
 ## ----subset_ts, eval=FALSE----------------------------------------------------
-#  gpm_subset_ts <- make_ts(gpm_subset)
+#  gpm_subset_ts <- make_ts(gpm_subset, 'gpm-imerg')
 #  head(gpm_subset_ts, 12)
 
 ## ----cz_ts, eval=FALSE--------------------------------------------------------
-#  gpm_cz_ts <- make_ts(gpm_cz)
+#  gpm_cz_ts <- make_ts(gpm_cz, 'gpm-imerg')
 #  head(gpm_cz_ts, 12)
 
 ## ----map_global, eval = FALSE-------------------------------------------------

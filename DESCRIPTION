@@ -1,6 +1,6 @@
 Package: pRecipe
 Title: Precipitation R Recipes
-Version: 2.4.0
+Version: 2.5.0
 Authors@R: 
   c(person(given = "Mijael Rodrigo", family = "Vargas Godoy",
            email = "mirovago@gmail.com", role = c("aut", "cre"),
@@ -14,7 +14,8 @@ Description: An open-access tool/framework to download, validate, visualize,
   for consistent and reproducible analysis regarding precipitation.
 Depends: R (>= 4.0.0)
 Imports: grDevices, methods, parallel, stats, utils, data.table,
-        ggplot2, ggpubr, ncdf4, openair, raster, R.utils, scales, sf
+        ggplot2, ggpubr, magrittr, ncdf4, openair, raster, R.utils,
+        scales, sf
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -30,10 +31,10 @@ Config/testthat/edition: 3
 Language: en-US
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2023-05-26 14:00:33 UTC; mirovago
+Packaged: 2023-06-13 08:44:24 UTC; mirovago
 Author: Mijael Rodrigo Vargas Godoy [aut, cre]
     (<https://orcid.org/0000-0002-1828-9266>),
   Yannis Markonis [aut, ths] (<https://orcid.org/0000-0003-0144-8969>)
 Maintainer: Mijael Rodrigo Vargas Godoy <mirovago@gmail.com>
 Repository: CRAN
-Date/Publication: 2023-05-26 15:20:02 UTC
+Date/Publication: 2023-06-13 09:10:02 UTC
