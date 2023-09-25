@@ -1,6 +1,6 @@
-8bc7aad46ee12eb855730ae4bfbfa851 *DESCRIPTION
+f1d8fb5fdcb5c616509ebbd69d5335a2 *DESCRIPTION
 cc7653cd803f4c8cc356fabedf7b96f9 *NAMESPACE
-c3a212561c207e68bd84160c70216ee4 *NEWS.md
+ec1655e8c03c9fcbc06bf58648c69776 *NEWS.md
 698147e4f0aa950990206637157968bd *R/aux_date.R
 811919cf4e3bcc57f2a9d73973181de3 *R/aux_info.R
 cce829e80f4946f7e6b4ea5658856720 *R/crop_data.R
@@ -44,7 +44,7 @@ c46127974b0ac28b78edb78ad5b971d2 *R/globals.R
 c598ca170888bb34c8f4eb2ba6edf0da *R/muldpm.R
 f833bcd04728f0c8f79e0d96c05fdd6f *R/nse.R
 85584489d03a4d12b125e225bb02539e *R/pRecipe.R
-214b6bef8bb3f24d8069ff5f10820b77 *R/pRecipe_masks.R
+96616e1ece693694ea0444e70f8915ff *R/pRecipe_masks.R
 b56ff2b193ecba52f9ec7f3b10cca008 *R/pipe.R
 86641f93a6b47a4f074cc15918fb1988 *R/plot_box.R
 600e5567d2001b5ffc4e8d1cef9698d9 *R/plot_density.R
@@ -61,14 +61,14 @@ a695d47d8627c3a44555ac859414768a *R/pod.R
 932dab523181ad0feac3789306d39b8b *R/subset_data.R
 a91c37f3b38eebe30d4e6ecf942cfde1 *R/tabular.R
 79c424248f9363df2050164862f49051 *R/trend.R
-ef7b6ceae3dbfd085aaf8329b6f57507 *R/yearstat.R
+0efff0a6341107fb2f4680d556b808c7 *R/yearstat.R
 7080893e02c49cd296d4424b9be55069 *build/partial.rdb
 7dbd1dc93377038a9c34cb94317a2e96 *build/vignette.rds
 e57c59ab7e54770e76460aec33e907b4 *inst/CITATION
 32a5d25494bdaf493d146233accf0cc4 *inst/WORDLIST
-73493ad4cfa0c223271ef4dffb1e9313 *inst/doc/introduction.R
-6b4c7a34044d4bf155209cbcdb9feea8 *inst/doc/introduction.Rmd
-1e81124e0e1e98efb4b1eabf661c0ce5 *inst/doc/introduction.html
+48b2e367b01a5a5a5c12ec9cbefa99e0 *inst/doc/introduction.R
+df4db56c9e23b30da92a4d8138ca1998 *inst/doc/introduction.Rmd
+903daaea6c1a6454c29b3650bea93c8d *inst/doc/introduction.html
 046ff1d9fb5e2dc0a40c5ed69fd753d6 *man/aux_date.Rd
 086de082fc8fe6b9beb39d09a3e52b9c *man/aux_info.Rd
 d39d33490760ee1f97a320dc187298a7 *man/crop_data.Rd
@@ -133,7 +133,7 @@ eeee90ef9b0930e9c23a91b0e1fa81bd *man/yearstat.Rd
 0622a97a2aaa3c342f09636052c2d7f5 *tests/spelling.R
 cb71fdced72b3f5d83d5d6304acead82 *tests/testthat.R
 089f7661a321af27b9e00ffa108b3ddf *tests/testthat/test-pRecipe.R
-6b4c7a34044d4bf155209cbcdb9feea8 *vignettes/introduction.Rmd
+df4db56c9e23b30da92a4d8138ca1998 *vignettes/introduction.Rmd
 46ecdd04b3845a10ce0b808fc709108c *vignettes/pRecipe.bib
 baa0aa6a1182e2bb9bf9069bede86f95 *vignettes/plots/box.png
 6c9608463d679c31ed1df25dd96b2c9a *vignettes/plots/box_bo.png
