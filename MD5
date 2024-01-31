@@ -1,6 +1,6 @@
-55557bb06c78b0e0f7c0a4892605e6db *DESCRIPTION
+6bb6757dc3d12685a3a5c35f32a6c788 *DESCRIPTION
 cc7653cd803f4c8cc356fabedf7b96f9 *NAMESPACE
-eda01a390190b4faa6bce474180e418f *NEWS.md
+b11c78daa5716a19641cf62c61fe51b5 *NEWS.md
 698147e4f0aa950990206637157968bd *R/aux_date.R
 811919cf4e3bcc57f2a9d73973181de3 *R/aux_info.R
 cce829e80f4946f7e6b4ea5658856720 *R/crop_data.R
@@ -43,7 +43,7 @@ c46127974b0ac28b78edb78ad5b971d2 *R/globals.R
 5716b1776f519bd86b92e1884e4c612a *R/label.R
 c598ca170888bb34c8f4eb2ba6edf0da *R/muldpm.R
 f833bcd04728f0c8f79e0d96c05fdd6f *R/nse.R
-85584489d03a4d12b125e225bb02539e *R/pRecipe.R
+35c940293146e175f766ecd78472ecd9 *R/pRecipe.R
 ba56e02dcda00add849a8a13fc386fe6 *R/pRecipe_masks.R
 b56ff2b193ecba52f9ec7f3b10cca008 *R/pipe.R
 86641f93a6b47a4f074cc15918fb1988 *R/plot_box.R
@@ -60,7 +60,7 @@ a695d47d8627c3a44555ac859414768a *R/pod.R
 35eae32157a253291467f85d243ddcfc *R/selyear.R
 932dab523181ad0feac3789306d39b8b *R/subset_data.R
 a91c37f3b38eebe30d4e6ecf942cfde1 *R/tabular.R
-79c424248f9363df2050164862f49051 *R/trend.R
+fd45000e19bd91dc5be5fadde9092e24 *R/trend.R
 0efff0a6341107fb2f4680d556b808c7 *R/yearstat.R
 8faf250d78a120ba4c7ea2186efddd24 *build/partial.rdb
 034f01ed6927c4ee99eb53df37305251 *build/vignette.rds
@@ -68,7 +68,7 @@ e57c59ab7e54770e76460aec33e907b4 *inst/CITATION
 d7161995aa3c2c6f81a8a8d91c93f55d *inst/WORDLIST
 48b2e367b01a5a5a5c12ec9cbefa99e0 *inst/doc/introduction.R
 df4db56c9e23b30da92a4d8138ca1998 *inst/doc/introduction.Rmd
-466f5c2ca27e9174db28bfc6668bae6d *inst/doc/introduction.html
+815b3189f2cb9400fb58e195afb78c56 *inst/doc/introduction.html
 046ff1d9fb5e2dc0a40c5ed69fd753d6 *man/aux_date.Rd
 086de082fc8fe6b9beb39d09a3e52b9c *man/aux_info.Rd
 d39d33490760ee1f97a320dc187298a7 *man/crop_data.Rd
@@ -111,7 +111,7 @@ fe23610348bc2fa1c193fe971c2a0d6a *man/infoNC.Rd
 2c8f55b0d1e85ed8acdfc981b02eef5f *man/label.Rd
 c0da06100be927c62cd2e75f65f67366 *man/muldpm.Rd
 4d04f0120af3d4b04fc148ed37be6268 *man/nse.Rd
-e700862a942b8806d8d13f5dc295d7f4 *man/pRecipe-package.Rd
+53655702e6df3226f52fd209cf9b7b17 *man/pRecipe-package.Rd
 de8835ad45508bcf412178f30c35b5de *man/pRecipe_masks.Rd
 0596d317574eebf61378c8cbdb43a3d0 *man/pipe.Rd
 b249fe53252f1eabe27cbd63015d65ec *man/plot_box.Rd
